@@ -129,18 +129,20 @@ top_seasonal_products_df = top_3_product_sales(main_df)
 st.header('Final Project Dashboard :sparkles:')
 st.subheader('Sales Analysis')
 
-# Total Sales
-total_daily_sales = daily_sales_df.sum()
-total_daily_sales_formatted = format_currency(total_daily_sales, "USD", locale='en_US')
-st.metric("Total Sales (USD)", value=total_daily_sales_formatted)
+col1, col2 = st.columns(2)
 
-# daily Sales Plot
-with st.columns(2):
+# Total Sales
+total_daily_sales = daily_sales_df['Sales'].sum()
+total_daily_sales_formatted = format_currency(total_daily_sales, "USD", locale='en_US')
+col1.metric("Total Sales (USD)", value=total_daily_sales_formatted)
+
+# Daily Sales Plot
+with col2:
     st.subheader("Daily Sales Plot")
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.plot(
-        daily_sales_df.index,
-        daily_sales_df.values,
+        daily_sales_df['Date'],
+        daily_sales_df['Sales'],
         marker='o',
         linewidth=2,
         color="#90CAF9"
@@ -151,7 +153,8 @@ with st.columns(2):
     ax.set_ylabel("Daily Sales (USD)", fontsize=12)
     st.pyplot(fig)
 
-    # Top Products Ordered
+# Top Products Ordered
+with col1:
     st.subheader("Top Products Ordered")
     top_products = product_counts_df.sort_values(by='count', ascending=False).head(3)
     product_categories = top_products['product_category_name']
@@ -165,7 +168,6 @@ with st.columns(2):
     ax.tick_params(axis='x', labelrotation=45, labelsize=10)
     ax.tick_params(axis='y', labelsize=10)
     st.pyplot(fig)
-
 
 # Payment Analytics
 st.subheader("Payment Analytics")
