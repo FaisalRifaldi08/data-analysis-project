@@ -151,14 +151,18 @@ st.pyplot(fig)
 
 # Top Products Ordered
 st.subheader("Top Products Ordered")
-top_products = product_counts_df.sort_values(by='count', ascending=False).head(5)
+
+top_products = product_counts_df.sort_values(by='count', ascending=False).head(3)
+product_categories = top_products['product_category_name']
+counts = top_products['count']
 fig, ax = plt.subplots(figsize=(8, 4))
-colors = ["#90CAF9", "#FFC107", "#4CAF50", "#F44336", "#673AB7"]
-ax.barh(top_products['product_category_name'], top_products['count'], color=colors)
-ax.set_xlabel("Count", fontsize=10) 
-ax.set_ylabel("Product Category", fontsize=10) 
-ax.tick_params(axis='y', labelsize=10) 
-plt.xticks(fontsize=8) 
+colors = ["#90CAF9", "#FFC107", "#4CAF50"]
+
+ax.bar(product_categories, counts, color=colors)
+ax.set_xlabel("Product Category", fontsize=10)
+ax.set_ylabel("Count", fontsize=10)
+ax.tick_params(axis='x', labelrotation=45, labelsize=10)
+ax.tick_params(axis='y', labelsize=10)
 st.pyplot(fig)
 
 
