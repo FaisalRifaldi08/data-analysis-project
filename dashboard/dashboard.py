@@ -135,35 +135,36 @@ total_daily_sales_formatted = format_currency(total_daily_sales, "USD", locale='
 st.metric("Total Sales (USD)", value=total_daily_sales_formatted)
 
 # daily Sales Plot
-fig, ax = plt.subplots(figsize=(12, 6))
-ax.plot(
-    daily_sales_df.index,
-    daily_sales_df.values,
-    marker='o',
-    linewidth=2,
-    color="#90CAF9"
-)
-ax.tick_params(axis='y', labelsize=12)
-ax.tick_params(axis='x', labelsize=10)
-ax.set_xlabel("Day", fontsize=12)
-ax.set_ylabel("Daily Sales (USD)", fontsize=12)
-st.pyplot(fig)
+with st.columns(2):
+    st.subheader("Daily Sales Plot")
+    fig, ax = plt.subplots(figsize=(12, 6))
+    ax.plot(
+        daily_sales_df.index,
+        daily_sales_df.values,
+        marker='o',
+        linewidth=2,
+        color="#90CAF9"
+    )
+    ax.tick_params(axis='y', labelsize=12)
+    ax.tick_params(axis='x', labelsize=10)
+    ax.set_xlabel("Day", fontsize=12)
+    ax.set_ylabel("Daily Sales (USD)", fontsize=12)
+    st.pyplot(fig)
 
-# Top Products Ordered
-st.subheader("Top Products Ordered")
+    # Top Products Ordered
+    st.subheader("Top Products Ordered")
+    top_products = product_counts_df.sort_values(by='count', ascending=False).head(3)
+    product_categories = top_products['product_category_name']
+    counts = top_products['count']
+    fig, ax = plt.subplots(figsize=(8, 4))
+    colors = ["#90CAF9", "#FFC107", "#4CAF50"]
 
-top_products = product_counts_df.sort_values(by='count', ascending=False).head(3)
-product_categories = top_products['product_category_name']
-counts = top_products['count']
-fig, ax = plt.subplots(figsize=(8, 4))
-colors = ["#90CAF9", "#FFC107", "#4CAF50"]
-
-ax.bar(product_categories, counts, color=colors)
-ax.set_xlabel("Product Category", fontsize=10)
-ax.set_ylabel("Count", fontsize=10)
-ax.tick_params(axis='x', labelrotation=45, labelsize=10)
-ax.tick_params(axis='y', labelsize=10)
-st.pyplot(fig)
+    ax.bar(product_categories, counts, color=colors)
+    ax.set_xlabel("Product Category", fontsize=10)
+    ax.set_ylabel("Count", fontsize=10)
+    ax.tick_params(axis='x', labelrotation=45, labelsize=10)
+    ax.tick_params(axis='y', labelsize=10)
+    st.pyplot(fig)
 
 
 # Payment Analytics
