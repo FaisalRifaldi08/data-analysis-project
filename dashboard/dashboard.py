@@ -141,8 +141,8 @@ with col2:
     st.subheader("Daily Sales Plot")
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.plot(
-        daily_sales_df['Date'],
-        daily_sales_df['Sales'],
+        daily_sales_df.index,
+        daily_sales_df.values,
         marker='o',
         linewidth=2,
         color="#90CAF9"
@@ -168,6 +168,7 @@ with col1:
     ax.tick_params(axis='x', labelrotation=45, labelsize=10)
     ax.tick_params(axis='y', labelsize=10)
     st.pyplot(fig)
+    
 
 # Payment Analytics
 st.subheader("Payment Analytics")
