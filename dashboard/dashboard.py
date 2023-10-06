@@ -137,7 +137,7 @@ total_daily_sales_formatted = format_currency(total_daily_sales, "USD", locale='
 col1.metric("Total Sales (USD)", value=total_daily_sales_formatted)
 
 # Daily Sales Plot
-with col2:
+with col1:
     st.subheader("Daily Sales Plot")
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.plot(
@@ -154,7 +154,7 @@ with col2:
     st.pyplot(fig)
 
 # Top Products Ordered
-with col1:
+with col2:
     st.subheader("Top Products Ordered")
     top_products = product_counts_df.sort_values(by='count', ascending=False).head(3)
     product_categories = top_products['product_category_name']
