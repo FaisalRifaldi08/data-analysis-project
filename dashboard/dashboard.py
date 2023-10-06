@@ -18,31 +18,25 @@ def create_daily_sales_df(df):
 def process_final_df(df):
     filtered_by_status_df = df[df['order_status'].isin(['delivered', 'invoiced'])]
     
-    # Hilangkan filter 6 bulan di sini
     product_counts_df = df.groupby(['customer_id', 'product_category_name']).size().reset_index(name='count')
     
     return filtered_by_status_df, product_counts_df
 
-def last_year_payment_data(df):
-    last_year = df['order_purchase_timestamp'].max() - pd.DateOffset(years=1)
-    last_year_df = df[df['order_purchase_timestamp'] >= last_year]
-
-    payment_counts = last_year_df['payment_type'].value_counts()
-
-    payment_percentages_df = (payment_counts / len(last_year_df)) * 100
+def payment_data(df):
+    payment_counts = df['payment_type'].value_counts()
+    
+    payment_percentages_df = (payment_counts / len(df)) * 100
     
     return payment_percentages_df
 
 def payment_trends(df):
-    last_year = df['order_purchase_timestamp'].max() - pd.DateOffset(years=1)
-    last_year_df = df[df['order_purchase_timestamp'] >= last_year]
-
-    payment_trends_df = last_year_df.groupby([last_year_df['order_purchase_timestamp'].dt.strftime('%Y-%m'), 'payment_type']).size().unstack(fill_value=0)
+    payment_trends_df = df.groupby([df['order_purchase_timestamp'].dt.strftime('%Y-%m'), 'payment_type']).size().unstack(fill_value=0)
     
     return payment_trends_df
-
+    
 def city_opportunity(df):
     seller_counts = df['seller_city'].value_counts()
+    
     customer_counts = df['customer_city'].value_counts()
 
     city_opportunity = seller_counts - customer_counts
@@ -119,7 +113,7 @@ main_df = Final_df[(Final_df["order_purchase_timestamp"] >= start_date) &
 # Menyiapkan berbagai dataframe
 daily_sales_df = create_daily_sales_df(main_df)
 filtered_by_status_df, product_counts_df = process_final_df(main_df)
-payment_percentages_df = last_year_payment_data(main_df)
+payment_percentages_df = payment_data(main_df)
 payment_trends_df = payment_trends(main_df)
 city_opportunity_df = city_opportunity(main_df)
 delivery_time_and_review_df = delivery_time_and_review(main_df)
@@ -195,7 +189,7 @@ with col2:
         x=payment_trends_df.index,
         y=payment_trends_df.columns,
         labels={'x': 'Month', 'y': 'Count'},
-        title="Payment Trends Over the Last Year",
+        title="Payment Trends",
     )
     fig.update_layout(
         width=500,
