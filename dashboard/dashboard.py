@@ -132,7 +132,7 @@ st.subheader('Sales Analysis')
 col1, col2 = st.columns(2)
 
 # Total Sales
-total_daily_sales = daily_sales_df['Sales'].sum()
+total_daily_sales = daily_sales_df.sum()
 total_daily_sales_formatted = format_currency(total_daily_sales, "USD", locale='en_US')
 col1.metric("Total Sales (USD)", value=total_daily_sales_formatted)
 
