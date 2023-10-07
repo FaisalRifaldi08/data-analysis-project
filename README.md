@@ -14,4 +14,5 @@ streamlit run dashboard.py
 
 ## Link dashboard: https://first-project-dashboard.streamlit.app/
 
+### Rating
 ![Rating](https://github.com/FaisalRifaldi08/first-project/blob/main/Screenshot%20(133).png)https://github.com/FaisalRifaldi08/first-project/blob/main/Screenshot%20(133).png)
