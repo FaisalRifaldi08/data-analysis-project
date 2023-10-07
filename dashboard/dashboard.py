@@ -202,10 +202,12 @@ with col2:
 
 # City Opportunity Analysis
 st.subheader("City Opportunity")
-top_10_cities = city_opportunity_df.head(10)
+palette = sns.color_palette("coolwarm", len(top_10_cities))
+
+st.subheader("City Opportunity")
 sns.set(style='whitegrid')
 plt.figure(figsize=(6, 3))
-sns.barplot(x='Opportunity', y='City', data=top_10_cities)
+sns.barplot(x='Opportunity', y='City', data=top_10_cities, palette=palette)
 plt.xlabel('Opportunity', fontsize=8)
 plt.title('Top 10 Cities with Business Opportunities')
 st.pyplot(plt)
