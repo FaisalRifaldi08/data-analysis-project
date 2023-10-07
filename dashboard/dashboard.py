@@ -133,7 +133,7 @@ col1.metric("Total Sales (USD)", value=total_daily_sales_formatted)
 # Daily Sales Plot
 with col1:
     st.subheader("Daily Sales Plot")
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(16, 8))
     ax.plot(
         daily_sales_df.index,
         daily_sales_df.values,
