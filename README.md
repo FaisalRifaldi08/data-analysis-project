@@ -14,4 +14,4 @@ streamlit run dashboard.py
 
 ## Link dashboard: https://first-project-dashboard.streamlit.app/
 
-![Rating](Screenshot (133).png)
+![Rating]([Screenshot (133).pn](https://github.com/FaisalRifaldi08/first-project/blob/main/Screenshot%20(133).png)https://github.com/FaisalRifaldi08/first-project/blob/main/Screenshot%20(133).png)
