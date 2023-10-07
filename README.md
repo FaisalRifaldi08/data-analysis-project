@@ -11,3 +11,5 @@ pip pandas matplotlib seaborn streamlit Babel plotly numpy
 ```
 streamlit run dashboard.py
 ```
+
+## Link dashboard: https://first-project-dashboard.streamlit.app/
